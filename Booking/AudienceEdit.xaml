@@ -1,0 +1,37 @@
+﻿<Window x:Class="Booking.AudienceEdit"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Booking"
+        mc:Ignorable="d"
+        Title="Аудитория" Height="430" Width="310" MinHeight="300" MinWidth="310" MaxHeight="430" MaxWidth="310"
+        WindowStartupLocation="CenterScreen">
+    <Window.Background>
+        <ImageBrush ImageSource="/fon4.jpg"/>
+    </Window.Background>
+    <Grid>
+        <StackPanel Width="280" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,0" Background="#B2D8F1FF" Height="335">
+            <ScrollViewer Name="scroll" CanContentScroll="True">
+                <GroupBox Header="Информация" FontWeight="Bold">
+                    <StackPanel Orientation="Vertical">
+                        <Label Content="Номер аудитории*"/>
+                        <TextBox x:Name="txtaddnumber" TextWrapping="Wrap" Text="" MaxLength="5" TextChanged="txtaddnumber_TextChanged"/>
+                        <Label Content="Этаж*"/>
+                        <ComboBox x:Name="list_floor" IsTextSearchCaseSensitive="True" PreviewMouseLeftButtonDown="list_floor_PreviewMouseLeftButtonDown" IsEditable="True"></ComboBox>
+
+                        <Label Content="Инвентарь"/>
+                        <StackPanel x:Name="stackpanel_inventory" Margin="16,0,0,0">
+                        </StackPanel>
+                    </StackPanel>
+                </GroupBox>
+
+            </ScrollViewer>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,5" Width="287">
+            <Button x:Name="btnaddEdit" Content="Сохранить" Margin="5,5,5,5" Width="126.5" Background="#CC37A3D8" FontWeight="Bold" FontSize="14" Height="30" VerticalAlignment="Center" HorizontalAlignment="Center" Click="btnaddEdit_Click" IsEnabled="False"/>
+            <Button x:Name="btncancel" Content="Отменить" Margin="10,5,5,5" Width="126.5" Background="#CC37A3D8" FontWeight="Bold" FontSize="14" Height="30" Click="Button_Click" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </StackPanel>
+    </Grid>
+</Window>

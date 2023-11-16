@@ -1,0 +1,156 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Cuemon.Data.SqlClient</name>
+    </assembly>
+    <members>
+        <member name="T:Cuemon.Data.SqlClient.SqlDataManager">
+            <summary>
+            The SqlDataManager is the primary class of the <see cref="N:Cuemon.Data.SqlClient"/> namespace that can be used to execute commands targeted Microsoft SQL Server.
+            </summary>
+        </member>
+        <member name="M:Cuemon.Data.SqlClient.SqlDataManager.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Cuemon.Data.SqlClient.SqlDataManager"/> class.
+            Will resolve the default data connection element from the calling application, using the ConfigurationManager to get a CuemonDataSection.
+            </summary>
+        </member>
+        <member name="M:Cuemon.Data.SqlClient.SqlDataManager.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Cuemon.Data.SqlClient.SqlDataManager"/> class.
+            </summary>
+            <param name="connectionString">The connection string used to establish the connection.</param>
+        </member>
+        <member name="P:Cuemon.Data.SqlClient.SqlDataManager.ConnectionString">
+            <summary>
+            Gets the string used to open a SQL Server database.
+            </summary>
+            <value>The connection string that includes the source database name, and other parameters needed to establish the initial connection.</value>
+        </member>
+        <member name="P:Cuemon.Data.SqlClient.SqlDataManager.TransientFaultHandlingOptionsCallback">
+            <summary>
+            Gets or sets the callback delegate that will provide options for transient fault handling.
+            </summary>
+            <value>An <see cref="T:System.Action`1" /> with the options for transient fault handling.</value>
+            <remarks>
+            This implementation is compatible with transient related faults on Microsoft SQL Azure.<br/>
+            Microsoft SQL Server is supported as well.
+            </remarks>
+        </member>
+        <member name="M:Cuemon.Data.SqlClient.SqlDataManager.ExecuteIdentityInt32(Cuemon.Data.IDataCommand,System.Data.IDbDataParameter[])">
+            <summary>
+            Executes the command statement and returns an identity value as int.
+            </summary>
+            <param name="dataCommand">The data command to execute.</param>
+            <param name="parameters">The parameters to use in the command.</param>
+            <returns><see cref="T:System.Int32"/></returns>
+        </member>
+        <member name="M:Cuemon.Data.SqlClient.SqlDataManager.ExecuteIdentityInt64(Cuemon.Data.IDataCommand,System.Data.IDbDataParameter[])">
+            <summary>
+            Executes the command statement and returns an identity value as long.
+            </summary>
+            <param name="dataCommand">The data command to execute.</param>
+            <param name="parameters">The parameters to use in the command.</param>
+            <returns><see cref="T:System.Int64"/></returns>
+        </member>
+        <member name="M:Cuemon.Data.SqlClient.SqlDataManager.ExecuteIdentityDecimal(Cuemon.Data.IDataCommand,System.Data.IDbDataParameter[])">
+            <summary>
+            Executes the command statement and returns an identity value as decimal.
+            </summary>
+            <param name="dataCommand">The data command to execute.</param>
+            <param name="parameters">The parameters to use in the command.</param>
+            <returns><see cref="T:System.Decimal"/></returns>
+        </member>
+        <member name="M:Cuemon.Data.SqlClient.SqlDataManager.Clone">
+            <summary>
+            Creates a new object that is a copy of the current instance.
+            </summary>
+            <returns>
+            A new object that is a copy of this instance.
+            </returns>
+        </member>
+        <member name="M:Cuemon.Data.SqlClient.SqlDataManager.ExecuteCore``1(Cuemon.Data.IDataCommand,System.Data.IDbDataParameter[],System.Func{System.Data.Common.DbCommand,``0})">
+            <summary>
+            Core method for executing methods on the <see cref="T:System.Data.Common.DbCommand" /> object resolved from the virtual <see cref="M:Cuemon.Data.DataManager.ExecuteCommandCore(Cuemon.Data.IDataCommand,System.Data.Common.IDbDataParameter[])" /> method.
+            </summary>
+            <typeparam name="T">The type to return.</typeparam>
+            <param name="dataCommand">The data command to execute.</param>
+            <param name="parameters">The parameters to use in the command.</param>
+            <param name="commandInvoker">The function delegate that will invoke a method on the resolved <see cref="T:System.Data.Common.DbCommand" /> from the virtual <see cref="M:Cuemon.Data.DataManager.ExecuteCommandCore(Cuemon.Data.IDataCommand,System.Data.Common.IDbDataParameter[])" /> method.</param>
+            <returns>A value of <typeparamref name="T" /> that is equal to the invoked method of the <see cref="T:System.Data.Common.DbCommand" /> object.</returns>
+            <remarks>
+            If <see cref="P:Cuemon.Data.SqlClient.SqlDataManager.TransientFaultHandlingOptionsCallback"/> is null, no SQL operation is wrapped inside a transient fault handling operation.
+            Otherwise, if <see cref="P:Cuemon.Data.SqlClient.SqlDataManager.TransientFaultHandlingOptionsCallback"/> has the <see cref="P:Cuemon.Resilience.TransientOperationOptions.EnableRecovery"/> set to <c>true</c>, this method will, with it's default implementation, try to gracefully recover from transient faults when the following condition is met:<br/>
+            <see cref="P:Cuemon.Resilience.TransientOperationOptions.RetryAttempts"/> is less than the current attempt starting from 1 with a maximum of <see cref="F:System.Byte.MaxValue"/> retries<br/>
+            <see cref="P:Cuemon.Resilience.TransientOperationOptions.DetectionStrategy"/> must evaluate to <c>true</c><br/>
+            In case of a transient failure the default implementation will use <see cref="P:Cuemon.Resilience.TransientOperationOptions.RetryStrategy"/>.<br/>
+            In any other case the originating exception is thrown.
+            </remarks>
+        </member>
+        <member name="M:Cuemon.Data.SqlClient.SqlDataManager.GetCommandCore(Cuemon.Data.IDataCommand,System.Data.IDbDataParameter[])">
+            <summary>
+            Gets the command object used by all execute related methods.
+            </summary>
+            <param name="dataCommand">The data command to execute.</param>
+            <param name="parameters">The parameters to use in the command.</param>
+            <returns>A a new <see cref="T:System.Data.SqlClient.SqlCommand"/> instance.</returns>
+            <exception cref="T:System.ArgumentNullException">
+            <paramref name="dataCommand"/> cannot be null -or-
+            <paramref name="parameters"/> cannot be null.
+            </exception>
+        </member>
+        <member name="T:Cuemon.Data.SqlClient.SqlInOperator`1">
+            <summary>
+            Provides a safe way to include a Transact-SQL WHERE clause with an IN operator to execute against a SQL Server database.
+            </summary>
+            <typeparam name="T">The type of the data in the IN operation of the WHERE clause to execute against a SQL Server database.</typeparam>
+        </member>
+        <member name="M:Cuemon.Data.SqlClient.SqlInOperator`1.#ctor(System.Func{System.String})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Cuemon.Data.InOperator`1"/> class.
+            </summary>
+            <param name="parameterPrefixGenerator">The function delegate that generates a random prefix for a parameter name.</param>
+        </member>
+        <member name="M:Cuemon.Data.SqlClient.SqlInOperator`1.ParametersSelector(`0,System.Int32)">
+            <summary>
+            A callback method that is responsible for the values passed to the <see cref="M:Cuemon.Data.InOperator`1.ToSafeResult(`0[])"/> method.
+            </summary>
+            <param name="expression">An expression to test for a match in the IN operator.</param>
+            <param name="index">The index of the <paramref name="expression"/>.</param>
+            <returns>An <see cref="T:System.Data.IDbDataParameter"/> representing the value of the <paramref name="expression"/>.</returns>
+        </member>
+        <member name="T:Cuemon.Data.SqlClient.SqlQueryBuilder">
+            <summary>
+            A Microsoft SQL implementation of the <see cref="T:Cuemon.Data.QueryBuilder"/> class.
+            </summary>
+        </member>
+        <member name="M:Cuemon.Data.SqlClient.SqlQueryBuilder.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Cuemon.Data.SqlClient.SqlQueryBuilder"/> class.
+            </summary>
+        </member>
+        <member name="M:Cuemon.Data.SqlClient.SqlQueryBuilder.#ctor(System.String,System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Cuemon.Data.SqlClient.SqlQueryBuilder"/> class.
+            </summary>
+            <param name="tableName">The name of the table or view.</param>
+            <param name="keyColumns">The key columns to be used in this <see cref="T:Cuemon.Data.SqlClient.SqlQueryBuilder"/> instance.</param>
+        </member>
+        <member name="M:Cuemon.Data.SqlClient.SqlQueryBuilder.#ctor(System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Cuemon.Data.SqlClient.SqlQueryBuilder"/> class.
+            </summary>
+            <param name="tableName">The name of the table or view.</param>
+            <param name="keyColumns">The key columns to be used in this <see cref="T:Cuemon.Data.SqlClient.SqlQueryBuilder"/> instance.</param>
+            <param name="columns">The none-key columns to be used in this <see cref="T:Cuemon.Data.SqlClient.SqlQueryBuilder"/> instance.</param>
+        </member>
+        <member name="M:Cuemon.Data.SqlClient.SqlQueryBuilder.GetQuery(Cuemon.Data.QueryType,System.String)">
+            <summary>
+            Create and returns the query from the specified <see cref="T:Cuemon.Data.QueryType"/>.
+            </summary>
+            <param name="queryType">Type of the query to create.</param>
+            <param name="tableName">The name of the table or view. Overrides the class wide tableName.</param>
+            <returns>The result of the builder as a T-SQL query.</returns>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,929 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Cuemon.Resilience</name>
+    </assembly>
+    <members>
+        <member name="T:Cuemon.Resilience.AsyncTransientOperationOptions">
+            <summary>
+            Specifies options that is related to the <see cref="T:Cuemon.Resilience.TransientOperation"/> class.
+            </summary>
+        </member>
+        <member name="M:Cuemon.Resilience.AsyncTransientOperationOptions.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Cuemon.Resilience.TransientOperationOptions"/> class.
+            </summary>
+            <remarks>
+            The following table shows the initial property values for an instance of <see cref="T:Cuemon.Resilience.TransientOperationOptions"/>.
+            <list type="table">
+                <listheader>
+                    <term>Property</term>
+                    <description>Initial Value</description>
+                </listheader>
+                <item>
+                    <term><see cref="P:Cuemon.Resilience.AsyncTransientOperationOptions.CancellationToken"/></term>
+                    <description><c>default</c></description>
+                </item>
+            </list>
+            </remarks>
+        </member>
+        <member name="P:Cuemon.Resilience.AsyncTransientOperationOptions.CancellationToken">
+            <summary>
+            Gets or sets the cancellation token of an asynchronous operations.
+            </summary>
+            <value>The cancellation token of an asynchronous operations.</value>
+        </member>
+        <member name="T:Cuemon.Resilience.LatencyException">
+            <summary>
+            The exception that is thrown when a latency related operation was taking to long to complete.
+            </summary>
+        </member>
+        <member name="M:Cuemon.Resilience.LatencyException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Cuemon.Resilience.LatencyException"/> class.
+            </summary>
+        </member>
+        <member name="M:Cuemon.Resilience.LatencyException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Cuemon.Resilience.LatencyException"/> class.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+        </member>
+        <member name="M:Cuemon.Resilience.LatencyException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Cuemon.Resilience.LatencyException"/> class.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+            <param name="innerException">The exception that is the cause of the current exception. If the innerException parameter is not a null reference, the current exception is raised in a catch block that handles the inner exception.</param>
+        </member>
+        <member name="M:Cuemon.Resilience.LatencyException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Cuemon.Resilience.LatencyException"/> class.
+            </summary>
+            <param name="info">The object that holds the serialized object data.</param>
+            <param name="context">The contextual information about the source or destination.</param>
+        </member>
+        <member name="T:Cuemon.Resilience.TransientFaultEvidence">
+            <summary>
+            Provides evidence about a faulted <see cref="T:Cuemon.Resilience.TransientOperation"/>.
+            </summary>
+        </member>
+        <member name="M:Cuemon.Resilience.TransientFaultEvidence.#ctor(System.Int32,System.TimeSpan,System.TimeSpan,System.TimeSpan,Cuemon.Reflection.MethodDescriptor)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Cuemon.Resilience.TransientFaultEvidence"/> class.
+            </summary>
+            <param name="attempts">The number of attempts the <paramref name="descriptor"/> was invoked.</param>
+            <param name="recoveryWaitTime">The last wait time attempting recovery of <paramref name="descriptor"/>.</param>
+            <param name="totalRecoveryWaitTime">The total wait time attempting recovery of <paramref name="descriptor"/>.</param>
+            <param name="latency">The latency experienced with <paramref name="descriptor"/>.</param>
+            <param name="descriptor">The information about the method being protected from a transient fault.</param>
+        </member>
+        <member name="M:Cuemon.Resilience.TransientFaultEvidence.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Cuemon.Resilience.TransientFaultEvidence"/> class.
+            </summary>
+            <param name="info">The object that holds the serialized object data.</param>
+            <param name="context">The contextual information about the source or destination.</param>
+        </member>
+        <member name="P:Cuemon.Resilience.TransientFaultEvidence.Attempts">
+            <summary>
+            Gets the number of attempts the <see cref="P:Cuemon.Resilience.TransientFaultEvidence.Descriptor"/> was invoked.
+            </summary>
+            <value>The number of attempts the <see cref="P:Cuemon.Resilience.TransientFaultEvidence.Descriptor"/> was invoked.</value>
+        </member>
+        <member name="P:Cuemon.Resilience.TransientFaultEvidence.RecoveryWaitTime">
+            <summary>
+            Gets the last wait time attempting recovery of <see cref="P:Cuemon.Resilience.TransientFaultEvidence.Descriptor"/>.
+            </summary>
+            <value>The last wait time attempting recovery of <see cref="P:Cuemon.Resilience.TransientFaultEvidence.Descriptor"/>.</value>
+        </member>
+        <member name="P:Cuemon.Resilience.TransientFaultEvidence.TotalRecoveryWaitTime">
+            <summary>
+            Gets the total wait time attempting recovery of <see cref="P:Cuemon.Resilience.TransientFaultEvidence.Descriptor"/>.
+            </summary>
+            <value>The total wait time attempting recovery of <see cref="P:Cuemon.Resilience.TransientFaultEvidence.Descriptor"/>.</value>
+        </member>
+        <member name="P:Cuemon.Resilience.TransientFaultEvidence.Latency">
+            <summary>
+            Gets the latency experienced with <see cref="P:Cuemon.Resilience.TransientFaultEvidence.Descriptor"/>.
+            </summary>
+            <value>The latency experienced with <see cref="P:Cuemon.Resilience.TransientFaultEvidence.Descriptor"/>.</value>
+        </member>
+        <member name="P:Cuemon.Resilience.TransientFaultEvidence.Descriptor">
+            <summary>
+            Gets the information about the method being protected from a transient fault.
+            </summary>
+            <value>The information about the method being protected from a transient fault.</value>
+        </member>
+        <member name="M:Cuemon.Resilience.TransientFaultEvidence.ToString">
+            <summary>
+            Returns a <see cref="T:System.String" /> that represents this instance.
+            </summary>
+            <returns>A <see cref="T:System.String" /> that represents this instance.</returns>
+        </member>
+        <member name="M:Cuemon.Resilience.TransientFaultEvidence.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            When overridden in a derived class, sets the <see cref="T:System.Runtime.Serialization.SerializationInfo"/> with information about the exception.
+            </summary>
+            <param name="info">The object that holds the serialized object data.</param>
+            <param name="context">The contextual information about the source or destination.</param>
+        </member>
+        <member name="M:Cuemon.Resilience.TransientFaultEvidence.Equals(Cuemon.Resilience.TransientFaultEvidence)">
+            <summary>
+            Indicates whether the current object is equal to another object of the same type.
+            </summary>
+            <param name="other">An object to compare with this object.</param>
+            <returns>true if the current object is equal to the <paramref name="other">other</paramref> parameter; otherwise, false.</returns>
+        </member>
+        <member name="M:Cuemon.Resilience.TransientFaultEvidence.Equals(System.Object)">
+            <summary>
+            Determines whether the specified <see cref="T:System.Object" /> is equal to this instance.
+            </summary>
+            <param name="obj">The object to compare with the current object.</param>
+            <returns><c>true</c> if the specified <see cref="T:System.Object" /> is equal to this instance; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:Cuemon.Resilience.TransientFaultEvidence.GetHashCode">
+            <summary>
+            Returns a hash code for this instance.
+            </summary>
+            <returns>A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.</returns>
+        </member>
+        <member name="T:Cuemon.Resilience.TransientFaultException">
+            <summary>
+            The exception that is thrown when a transient fault handling was unsuccessful.
+            </summary>
+        </member>
+        <member name="M:Cuemon.Resilience.TransientFaultException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Cuemon.Resilience.TransientFaultException"/> class.
+            </summary>
+        </member>
+        <member name="M:Cuemon.Resilience.TransientFaultException.#ctor(System.String,Cuemon.Resilience.TransientFaultEvidence)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Cuemon.Resilience.TransientFaultException" /> class.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+            <param name="evidence">The evidence that provide details about the transient fault.</param>
+        </member>
+        <member name="M:Cuemon.Resilience.TransientFaultException.#ctor(System.String,System.Exception,Cuemon.Resilience.TransientFaultEvidence)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Cuemon.Resilience.TransientFaultException"/> class.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+            <param name="innerException">The exception that is the cause of the current exception. If the innerException parameter is not a null reference, the current exception is raised in a catch block that handles the inner exception.</param>
+            <param name="evidence">The evidence that provide details about the transient fault.</param>
+        </member>
+        <member name="M:Cuemon.Resilience.TransientFaultException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Cuemon.Resilience.TransientFaultException"/> class.
+            </summary>
+            <param name="info">The object that holds the serialized object data.</param>
+            <param name="context">The contextual information about the source or destination.</param>
+        </member>
+        <member name="P:Cuemon.Resilience.TransientFaultException.Evidence">
+            <summary>
+            Gets the evidence that provide details about the transient fault of this instance.
+            </summary>
+            <value>The evidence that provide details about the transient fault.</value>
+        </member>
+        <member name="M:Cuemon.Resilience.TransientFaultException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            When overridden in a derived class, sets the <see cref="T:System.Runtime.Serialization.SerializationInfo"></see> with information about the exception.
+            </summary>
+            <param name="info">The object that holds the serialized object data.</param>
+            <param name="context">The contextual information about the source or destination.</param>
+        </member>
+        <member name="M:Cuemon.Resilience.TransientFaultException.ToString">
+            <summary>
+            Returns a <see cref="T:System.String" /> that represents this instance.
+            </summary>
+            <returns>A <see cref="T:System.String" /> that represents this instance.</returns>
+        </member>
+        <member name="T:Cuemon.Resilience.TransientOperation">
+            <summary>
+            Provides a set of static methods that enable developers to make their applications more resilient by adding robust transient fault handling logic ideal for temporary condition such as network connectivity issues or service unavailability.
+            </summary>
+        </member>
+        <member name="M:Cuemon.Resilience.TransientOperation.WithFuncAsync``1(System.Func{System.Threading.CancellationToken,System.Threading.Tasks.Task{``0}},System.Action{Cuemon.Resilience.AsyncTransientOperationOptions})">
+             <summary>
+             Repetitively executes the specified <paramref name="faultSensitiveMethod"/> until the operation is successful, the amount of retry attempts has been reached, or a failed operation is not considered related to transient fault condition.
+             </summary>
+             <typeparam name="TResult">The type of the return value of the function delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <param name="faultSensitiveMethod">The fault sensitive <see cref="T:System.Threading.Tasks.Task`1"/> based function delegate that is invoked until an operation is successful, the amount of retry attempts has been reached, or a failed operation is not considered related to transient fault condition.</param>
+             <param name="setup">The <see cref="T:Cuemon.Resilience.AsyncTransientOperationOptions"/> which may be configured.</param>
+             <returns>The result from the <paramref name="faultSensitiveMethod"/>.</returns>
+             <returns>A task that represents the asynchronous operation. The task result contains the return value of the function delegate <paramref name="faultSensitiveMethod"/>.</returns>
+             <exception cref="T:System.ArgumentNullException">
+             <paramref name="faultSensitiveMethod"/> cannot be null.
+             </exception>
+             <exception cref="T:Cuemon.Resilience.LatencyException">
+             The <paramref name="faultSensitiveMethod"/> exceeded the maximum time allowed to network latency.
+             </exception>
+             <exception cref="T:System.AggregateException">
+             The <paramref name="faultSensitiveMethod"/> was a victim of a transient fault. The <see cref="P:System.AggregateException.InnerExceptions"/> collection contains a <see cref="T:Cuemon.Resilience.TransientFaultException"/> object.
+            
+             -or
+            
+             An exception was thrown during the invocation of the <paramref name="faultSensitiveMethod"/>. The <see cref="P:System.AggregateException.InnerExceptions"/> collection contains information about the exception or exceptions.
+             </exception>
+        </member>
+        <member name="M:Cuemon.Resilience.TransientOperation.WithFuncAsync``2(System.Func{``0,System.Threading.CancellationToken,System.Threading.Tasks.Task{``1}},``0,System.Action{Cuemon.Resilience.AsyncTransientOperationOptions})">
+             <summary>
+             Repetitively executes the specified <paramref name="faultSensitiveMethod"/> until the operation is successful, the amount of retry attempts has been reached, or a failed operation is not considered related to transient fault condition.
+             </summary>
+             <typeparam name="T">The type of the parameter of the function delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <typeparam name="TResult">The type of the return value of the function delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <param name="faultSensitiveMethod">The fault sensitive <see cref="T:System.Threading.Tasks.Task`1"/> based function delegate that is invoked until an operation is successful, the amount of retry attempts has been reached, or a failed operation is not considered related to transient fault condition.</param>
+             <param name="arg">The parameter of the function delegate <paramref name="faultSensitiveMethod"/>.</param>
+             <param name="setup">The <see cref="T:Cuemon.Resilience.AsyncTransientOperationOptions"/> which may be configured.</param>
+             <returns>The result from the <paramref name="faultSensitiveMethod"/>.</returns>
+             <returns>A task that represents the asynchronous operation. The task result contains the return value of the function delegate <paramref name="faultSensitiveMethod"/>.</returns>
+             <exception cref="T:System.ArgumentNullException">
+             <paramref name="faultSensitiveMethod"/> cannot be null.
+             </exception>
+             <exception cref="T:Cuemon.Resilience.LatencyException">
+             The <paramref name="faultSensitiveMethod"/> exceeded the maximum time allowed to network latency.
+             </exception>
+             <exception cref="T:System.AggregateException">
+             The <paramref name="faultSensitiveMethod"/> was a victim of a transient fault. The <see cref="P:System.AggregateException.InnerExceptions"/> collection contains a <see cref="T:Cuemon.Resilience.TransientFaultException"/> object.
+            
+             -or
+            
+             An exception was thrown during the invocation of the <paramref name="faultSensitiveMethod"/>. The <see cref="P:System.AggregateException.InnerExceptions"/> collection contains information about the exception or exceptions.
+             </exception>
+        </member>
+        <member name="M:Cuemon.Resilience.TransientOperation.WithFuncAsync``3(System.Func{``0,``1,System.Threading.CancellationToken,System.Threading.Tasks.Task{``2}},``0,``1,System.Action{Cuemon.Resilience.AsyncTransientOperationOptions})">
+             <summary>
+             Repetitively executes the specified <paramref name="faultSensitiveMethod"/> until the operation is successful, the amount of retry attempts has been reached, or a failed operation is not considered related to transient fault condition.
+             </summary>
+             <typeparam name="T1">The type of the first parameter of the function delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <typeparam name="T2">The type of the second parameter of the function delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <typeparam name="TResult">The type of the return value of the function delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <param name="faultSensitiveMethod">The fault sensitive <see cref="T:System.Threading.Tasks.Task`1"/> based function delegate that is invoked until an operation is successful, the amount of retry attempts has been reached, or a failed operation is not considered related to transient fault condition.</param>
+             <param name="arg1">The first parameter of the function delegate <paramref name="faultSensitiveMethod"/>.</param>
+             <param name="arg2">The second parameter of the function delegate <paramref name="faultSensitiveMethod"/>.</param>
+             <param name="setup">The <see cref="T:Cuemon.Resilience.AsyncTransientOperationOptions"/> which may be configured.</param>
+             <returns>The result from the <paramref name="faultSensitiveMethod"/>.</returns>
+             <returns>A task that represents the asynchronous operation. The task result contains the return value of the function delegate <paramref name="faultSensitiveMethod"/>.</returns>
+             <exception cref="T:System.ArgumentNullException">
+             <paramref name="faultSensitiveMethod"/> cannot be null.
+             </exception>
+             <exception cref="T:Cuemon.Resilience.LatencyException">
+             The <paramref name="faultSensitiveMethod"/> exceeded the maximum time allowed to network latency.
+             </exception>
+             <exception cref="T:System.AggregateException">
+             The <paramref name="faultSensitiveMethod"/> was a victim of a transient fault. The <see cref="P:System.AggregateException.InnerExceptions"/> collection contains a <see cref="T:Cuemon.Resilience.TransientFaultException"/> object.
+            
+             -or
+            
+             An exception was thrown during the invocation of the <paramref name="faultSensitiveMethod"/>. The <see cref="P:System.AggregateException.InnerExceptions"/> collection contains information about the exception or exceptions.
+             </exception>
+        </member>
+        <member name="M:Cuemon.Resilience.TransientOperation.WithFuncAsync``4(System.Func{``0,``1,``2,System.Threading.CancellationToken,System.Threading.Tasks.Task{``3}},``0,``1,``2,System.Action{Cuemon.Resilience.AsyncTransientOperationOptions})">
+             <summary>
+             Repetitively executes the specified <paramref name="faultSensitiveMethod"/> until the operation is successful, the amount of retry attempts has been reached, or a failed operation is not considered related to transient fault condition.
+             </summary>
+             <typeparam name="T1">The type of the first parameter of the function delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <typeparam name="T2">The type of the second parameter of the function delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <typeparam name="T3">The type of the third parameter of the function delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <typeparam name="TResult">The type of the return value of the function delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <param name="faultSensitiveMethod">The fault sensitive <see cref="T:System.Threading.Tasks.Task`1"/> based function delegate that is invoked until an operation is successful, the amount of retry attempts has been reached, or a failed operation is not considered related to transient fault condition.</param>
+             <param name="arg1">The first parameter of the function delegate <paramref name="faultSensitiveMethod"/>.</param>
+             <param name="arg2">The second parameter of the function delegate <paramref name="faultSensitiveMethod"/>.</param>
+             <param name="arg3">The third parameter of the function delegate <paramref name="faultSensitiveMethod"/>.</param>
+             <param name="setup">The <see cref="T:Cuemon.Resilience.AsyncTransientOperationOptions"/> which may be configured.</param>
+             <returns>The result from the <paramref name="faultSensitiveMethod"/>.</returns>
+             <returns>A task that represents the asynchronous operation. The task result contains the return value of the function delegate <paramref name="faultSensitiveMethod"/>.</returns>
+             <exception cref="T:System.ArgumentNullException">
+             <paramref name="faultSensitiveMethod"/> cannot be null.
+             </exception>
+             <exception cref="T:Cuemon.Resilience.LatencyException">
+             The <paramref name="faultSensitiveMethod"/> exceeded the maximum time allowed to network latency.
+             </exception>
+             <exception cref="T:System.AggregateException">
+             The <paramref name="faultSensitiveMethod"/> was a victim of a transient fault. The <see cref="P:System.AggregateException.InnerExceptions"/> collection contains a <see cref="T:Cuemon.Resilience.TransientFaultException"/> object.
+            
+             -or
+            
+             An exception was thrown during the invocation of the <paramref name="faultSensitiveMethod"/>. The <see cref="P:System.AggregateException.InnerExceptions"/> collection contains information about the exception or exceptions.
+             </exception>
+        </member>
+        <member name="M:Cuemon.Resilience.TransientOperation.WithFuncAsync``5(System.Func{``0,``1,``2,``3,System.Threading.CancellationToken,System.Threading.Tasks.Task{``4}},``0,``1,``2,``3,System.Action{Cuemon.Resilience.AsyncTransientOperationOptions})">
+             <summary>
+             Repetitively executes the specified <paramref name="faultSensitiveMethod"/> until the operation is successful, the amount of retry attempts has been reached, or a failed operation is not considered related to transient fault condition.
+             </summary>
+             <typeparam name="T1">The type of the first parameter of the function delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <typeparam name="T2">The type of the second parameter of the function delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <typeparam name="T3">The type of the third parameter of the function delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <typeparam name="T4">The type of the fourth parameter of the function delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <typeparam name="TResult">The type of the return value of the function delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <param name="faultSensitiveMethod">The fault sensitive <see cref="T:System.Threading.Tasks.Task`1"/> based function delegate that is invoked until an operation is successful, the amount of retry attempts has been reached, or a failed operation is not considered related to transient fault condition.</param>
+             <param name="arg1">The first parameter of the function delegate <paramref name="faultSensitiveMethod"/>.</param>
+             <param name="arg2">The second parameter of the function delegate <paramref name="faultSensitiveMethod"/>.</param>
+             <param name="arg3">The third parameter of the function delegate <paramref name="faultSensitiveMethod"/>.</param>
+             <param name="arg4">The fourth parameter of the function delegate <paramref name="faultSensitiveMethod"/>.</param>
+             <param name="setup">The <see cref="T:Cuemon.Resilience.AsyncTransientOperationOptions"/> which may be configured.</param>
+             <returns>The result from the <paramref name="faultSensitiveMethod"/>.</returns>
+             <returns>A task that represents the asynchronous operation. The task result contains the return value of the function delegate <paramref name="faultSensitiveMethod"/>.</returns>
+             <exception cref="T:System.ArgumentNullException">
+             <paramref name="faultSensitiveMethod"/> cannot be null.
+             </exception>
+             <exception cref="T:Cuemon.Resilience.LatencyException">
+             The <paramref name="faultSensitiveMethod"/> exceeded the maximum time allowed to network latency.
+             </exception>
+             <exception cref="T:System.AggregateException">
+             The <paramref name="faultSensitiveMethod"/> was a victim of a transient fault. The <see cref="P:System.AggregateException.InnerExceptions"/> collection contains a <see cref="T:Cuemon.Resilience.TransientFaultException"/> object.
+            
+             -or
+            
+             An exception was thrown during the invocation of the <paramref name="faultSensitiveMethod"/>. The <see cref="P:System.AggregateException.InnerExceptions"/> collection contains information about the exception or exceptions.
+             </exception>
+        </member>
+        <member name="M:Cuemon.Resilience.TransientOperation.WithFuncAsync``6(System.Func{``0,``1,``2,``3,``4,System.Threading.CancellationToken,System.Threading.Tasks.Task{``5}},``0,``1,``2,``3,``4,System.Action{Cuemon.Resilience.AsyncTransientOperationOptions})">
+             <summary>
+             Repetitively executes the specified <paramref name="faultSensitiveMethod"/> until the operation is successful, the amount of retry attempts has been reached, or a failed operation is not considered related to transient fault condition.
+             </summary>
+             <typeparam name="T1">The type of the first parameter of the function delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <typeparam name="T2">The type of the second parameter of the function delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <typeparam name="T3">The type of the third parameter of the function delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <typeparam name="T4">The type of the fourth parameter of the function delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <typeparam name="T5">The type of the fifth parameter of the function delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <typeparam name="TResult">The type of the return value of the function delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <param name="faultSensitiveMethod">The fault sensitive <see cref="T:System.Threading.Tasks.Task`1"/> based function delegate that is invoked until an operation is successful, the amount of retry attempts has been reached, or a failed operation is not considered related to transient fault condition.</param>
+             <param name="arg1">The first parameter of the function delegate <paramref name="faultSensitiveMethod"/>.</param>
+             <param name="arg2">The second parameter of the function delegate <paramref name="faultSensitiveMethod"/>.</param>
+             <param name="arg3">The third parameter of the function delegate <paramref name="faultSensitiveMethod"/>.</param>
+             <param name="arg4">The fourth parameter of the function delegate <paramref name="faultSensitiveMethod"/>.</param>
+             <param name="arg5">The fifth parameter of the function delegate <paramref name="faultSensitiveMethod"/>.</param>
+             <param name="setup">The <see cref="T:Cuemon.Resilience.AsyncTransientOperationOptions"/> which may be configured.</param>
+             <returns>The result from the <paramref name="faultSensitiveMethod"/>.</returns>
+             <returns>A task that represents the asynchronous operation. The task result contains the return value of the function delegate <paramref name="faultSensitiveMethod"/>.</returns>
+             <exception cref="T:System.ArgumentNullException">
+             <paramref name="faultSensitiveMethod"/> cannot be null.
+             </exception>
+             <exception cref="T:Cuemon.Resilience.LatencyException">
+             The <paramref name="faultSensitiveMethod"/> exceeded the maximum time allowed to network latency.
+             </exception>
+             <exception cref="T:System.AggregateException">
+             The <paramref name="faultSensitiveMethod"/> was a victim of a transient fault. The <see cref="P:System.AggregateException.InnerExceptions"/> collection contains a <see cref="T:Cuemon.Resilience.TransientFaultException"/> object.
+            
+             -or
+            
+             An exception was thrown during the invocation of the <paramref name="faultSensitiveMethod"/>. The <see cref="P:System.AggregateException.InnerExceptions"/> collection contains information about the exception or exceptions.
+             </exception>
+        </member>
+        <member name="M:Cuemon.Resilience.TransientOperation.WithActionAsync(System.Func{System.Threading.CancellationToken,System.Threading.Tasks.Task},System.Action{Cuemon.Resilience.AsyncTransientOperationOptions})">
+             <summary>
+             Repetitively executes the specified <paramref name="faultSensitiveMethod"/> until the operation is successful, the amount of retry attempts has been reached, or a failed operation is not considered related to transient fault condition.
+             </summary>
+             <param name="faultSensitiveMethod">The fault sensitive <see cref="T:System.Threading.Tasks.Task"/> based function delegate that is invoked until an operation is successful, the amount of retry attempts has been reached, or a failed operation is not considered related to transient fault condition.</param>
+             <param name="setup">The <see cref="T:Cuemon.Resilience.AsyncTransientOperationOptions"/> which may be configured.</param>
+             <returns>A task that represents the asynchronous operation.</returns>
+             <exception cref="T:System.ArgumentNullException">
+             <paramref name="faultSensitiveMethod"/> cannot be null.
+             </exception>
+             <exception cref="T:Cuemon.Resilience.LatencyException">
+             The <paramref name="faultSensitiveMethod"/> exceeded the maximum time allowed to network latency.
+             </exception>
+             <exception cref="T:System.AggregateException">
+             The <paramref name="faultSensitiveMethod"/> was a victim of a transient fault. The <see cref="P:System.AggregateException.InnerExceptions"/> collection contains a <see cref="T:Cuemon.Resilience.TransientFaultException"/> object.
+            
+             -or
+            
+             An exception was thrown during the invocation of the <paramref name="faultSensitiveMethod"/>. The <see cref="P:System.AggregateException.InnerExceptions"/> collection contains information about the exception or exceptions.
+             </exception>
+        </member>
+        <member name="M:Cuemon.Resilience.TransientOperation.WithActionAsync``1(System.Func{``0,System.Threading.CancellationToken,System.Threading.Tasks.Task},``0,System.Action{Cuemon.Resilience.AsyncTransientOperationOptions})">
+             <summary>
+             Repetitively executes the specified <paramref name="faultSensitiveMethod"/> until the operation is successful, the amount of retry attempts has been reached, or a failed operation is not considered related to transient fault condition.
+             </summary>
+             <typeparam name="T">The type of the parameter of the delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <param name="faultSensitiveMethod">The fault sensitive <see cref="T:System.Threading.Tasks.Task"/> based function delegate that is invoked until an operation is successful, the amount of retry attempts has been reached, or a failed operation is not considered related to transient fault condition.</param>
+             <param name="arg">The parameter of the delegate <paramref name="faultSensitiveMethod"/>.</param>
+             <param name="setup">The <see cref="T:Cuemon.Resilience.AsyncTransientOperationOptions"/> which may be configured.</param>
+             <returns>A task that represents the asynchronous operation.</returns>
+             <exception cref="T:System.ArgumentNullException">
+             <paramref name="faultSensitiveMethod"/> cannot be null.
+             </exception>
+             <exception cref="T:Cuemon.Resilience.LatencyException">
+             The <paramref name="faultSensitiveMethod"/> exceeded the maximum time allowed to network latency.
+             </exception>
+             <exception cref="T:System.AggregateException">
+             The <paramref name="faultSensitiveMethod"/> was a victim of a transient fault. The <see cref="P:System.AggregateException.InnerExceptions"/> collection contains a <see cref="T:Cuemon.Resilience.TransientFaultException"/> object.
+            
+             -or
+            
+             An exception was thrown during the invocation of the <paramref name="faultSensitiveMethod"/>. The <see cref="P:System.AggregateException.InnerExceptions"/> collection contains information about the exception or exceptions.
+             </exception>
+        </member>
+        <member name="M:Cuemon.Resilience.TransientOperation.WithActionAsync``2(System.Func{``0,``1,System.Threading.CancellationToken,System.Threading.Tasks.Task},``0,``1,System.Action{Cuemon.Resilience.AsyncTransientOperationOptions})">
+             <summary>
+             Repetitively executes the specified <paramref name="faultSensitiveMethod"/> until the operation is successful, the amount of retry attempts has been reached, or a failed operation is not considered related to transient fault condition.
+             </summary>
+             <typeparam name="T1">The type of the first parameter of the delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <typeparam name="T2">The type of the second parameter of the delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <param name="faultSensitiveMethod">The fault sensitive <see cref="T:System.Threading.Tasks.Task"/> based function delegate that is invoked until an operation is successful, the amount of retry attempts has been reached, or a failed operation is not considered related to transient fault condition.</param>
+             <param name="arg1">The first parameter of the delegate <paramref name="faultSensitiveMethod"/>.</param>
+             <param name="arg2">The second parameter of the delegate <paramref name="faultSensitiveMethod"/>.</param>
+             <param name="setup">The <see cref="T:Cuemon.Resilience.AsyncTransientOperationOptions"/> which may be configured.</param>
+             <returns>A task that represents the asynchronous operation.</returns>
+             <exception cref="T:System.ArgumentNullException">
+             <paramref name="faultSensitiveMethod"/> cannot be null.
+             </exception>
+             <exception cref="T:Cuemon.Resilience.LatencyException">
+             The <paramref name="faultSensitiveMethod"/> exceeded the maximum time allowed to network latency.
+             </exception>
+             <exception cref="T:System.AggregateException">
+             The <paramref name="faultSensitiveMethod"/> was a victim of a transient fault. The <see cref="P:System.AggregateException.InnerExceptions"/> collection contains a <see cref="T:Cuemon.Resilience.TransientFaultException"/> object.
+            
+             -or
+            
+             An exception was thrown during the invocation of the <paramref name="faultSensitiveMethod"/>. The <see cref="P:System.AggregateException.InnerExceptions"/> collection contains information about the exception or exceptions.
+             </exception>
+        </member>
+        <member name="M:Cuemon.Resilience.TransientOperation.WithActionAsync``3(System.Func{``0,``1,``2,System.Threading.CancellationToken,System.Threading.Tasks.Task},``0,``1,``2,System.Action{Cuemon.Resilience.AsyncTransientOperationOptions})">
+             <summary>
+             Repetitively executes the specified <paramref name="faultSensitiveMethod"/> until the operation is successful, the amount of retry attempts has been reached, or a failed operation is not considered related to transient fault condition.
+             </summary>
+             <typeparam name="T1">The type of the first parameter of the delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <typeparam name="T2">The type of the second parameter of the delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <typeparam name="T3">The type of the third parameter of the delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <param name="faultSensitiveMethod">The fault sensitive <see cref="T:System.Threading.Tasks.Task"/> based function delegate that is invoked until an operation is successful, the amount of retry attempts has been reached, or a failed operation is not considered related to transient fault condition.</param>
+             <param name="arg1">The first parameter of the delegate <paramref name="faultSensitiveMethod"/>.</param>
+             <param name="arg2">The second parameter of the delegate <paramref name="faultSensitiveMethod"/>.</param>
+             <param name="arg3">The third parameter of the delegate <paramref name="faultSensitiveMethod"/>.</param>
+             <param name="setup">The <see cref="T:Cuemon.Resilience.AsyncTransientOperationOptions"/> which may be configured.</param>
+             <returns>A task that represents the asynchronous operation.</returns>
+             <exception cref="T:System.ArgumentNullException">
+             <paramref name="faultSensitiveMethod"/> cannot be null.
+             </exception>
+             <exception cref="T:Cuemon.Resilience.LatencyException">
+             The <paramref name="faultSensitiveMethod"/> exceeded the maximum time allowed to network latency.
+             </exception>
+             <exception cref="T:System.AggregateException">
+             The <paramref name="faultSensitiveMethod"/> was a victim of a transient fault. The <see cref="P:System.AggregateException.InnerExceptions"/> collection contains a <see cref="T:Cuemon.Resilience.TransientFaultException"/> object.
+            
+             -or
+            
+             An exception was thrown during the invocation of the <paramref name="faultSensitiveMethod"/>. The <see cref="P:System.AggregateException.InnerExceptions"/> collection contains information about the exception or exceptions.
+             </exception>
+        </member>
+        <member name="M:Cuemon.Resilience.TransientOperation.WithActionAsync``4(System.Func{``0,``1,``2,``3,System.Threading.CancellationToken,System.Threading.Tasks.Task},``0,``1,``2,``3,System.Action{Cuemon.Resilience.AsyncTransientOperationOptions})">
+             <summary>
+             Repetitively executes the specified <paramref name="faultSensitiveMethod"/> until the operation is successful, the amount of retry attempts has been reached, or a failed operation is not considered related to transient fault condition.
+             </summary>
+             <typeparam name="T1">The type of the first parameter of the delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <typeparam name="T2">The type of the second parameter of the delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <typeparam name="T3">The type of the third parameter of the delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <typeparam name="T4">The type of the fourth parameter of the delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <param name="faultSensitiveMethod">The fault sensitive <see cref="T:System.Threading.Tasks.Task"/> based function delegate that is invoked until an operation is successful, the amount of retry attempts has been reached, or a failed operation is not considered related to transient fault condition.</param>
+             <param name="arg1">The first parameter of the delegate <paramref name="faultSensitiveMethod"/>.</param>
+             <param name="arg2">The second parameter of the delegate <paramref name="faultSensitiveMethod"/>.</param>
+             <param name="arg3">The third parameter of the delegate <paramref name="faultSensitiveMethod"/>.</param>
+             <param name="arg4">The fourth parameter of the delegate <paramref name="faultSensitiveMethod"/>.</param>
+             <param name="setup">The <see cref="T:Cuemon.Resilience.AsyncTransientOperationOptions"/> which may be configured.</param>
+             <returns>A task that represents the asynchronous operation.</returns>
+             <exception cref="T:System.ArgumentNullException">
+             <paramref name="faultSensitiveMethod"/> cannot be null.
+             </exception>
+             <exception cref="T:Cuemon.Resilience.LatencyException">
+             The <paramref name="faultSensitiveMethod"/> exceeded the maximum time allowed to network latency.
+             </exception>
+             <exception cref="T:System.AggregateException">
+             The <paramref name="faultSensitiveMethod"/> was a victim of a transient fault. The <see cref="P:System.AggregateException.InnerExceptions"/> collection contains a <see cref="T:Cuemon.Resilience.TransientFaultException"/> object.
+            
+             -or
+            
+             An exception was thrown during the invocation of the <paramref name="faultSensitiveMethod"/>. The <see cref="P:System.AggregateException.InnerExceptions"/> collection contains information about the exception or exceptions.
+             </exception>
+        </member>
+        <member name="M:Cuemon.Resilience.TransientOperation.WithActionAsync``5(System.Func{``0,``1,``2,``3,``4,System.Threading.CancellationToken,System.Threading.Tasks.Task},``0,``1,``2,``3,``4,System.Action{Cuemon.Resilience.AsyncTransientOperationOptions})">
+             <summary>
+             Repetitively executes the specified <paramref name="faultSensitiveMethod"/> until the operation is successful, the amount of retry attempts has been reached, or a failed operation is not considered related to transient fault condition.
+             </summary>
+             <typeparam name="T1">The type of the first parameter of the delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <typeparam name="T2">The type of the second parameter of the delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <typeparam name="T3">The type of the third parameter of the delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <typeparam name="T4">The type of the fourth parameter of the delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <typeparam name="T5">The type of the fifth parameter of the delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <param name="faultSensitiveMethod">The fault sensitive <see cref="T:System.Threading.Tasks.Task"/> based function delegate that is invoked until an operation is successful, the amount of retry attempts has been reached, or a failed operation is not considered related to transient fault condition.</param>
+             <param name="arg1">The first parameter of the delegate <paramref name="faultSensitiveMethod"/>.</param>
+             <param name="arg2">The second parameter of the delegate <paramref name="faultSensitiveMethod"/>.</param>
+             <param name="arg3">The third parameter of the delegate <paramref name="faultSensitiveMethod"/>.</param>
+             <param name="arg4">The fourth parameter of the delegate <paramref name="faultSensitiveMethod"/>.</param>
+             <param name="arg5">The fifth parameter of the delegate <paramref name="faultSensitiveMethod"/>.</param>
+             <param name="setup">The <see cref="T:Cuemon.Resilience.AsyncTransientOperationOptions"/> which may be configured.</param>
+             <returns>A task that represents the asynchronous operation.</returns>
+             <exception cref="T:System.ArgumentNullException">
+             <paramref name="faultSensitiveMethod"/> cannot be null.
+             </exception>
+             <exception cref="T:Cuemon.Resilience.LatencyException">
+             The <paramref name="faultSensitiveMethod"/> exceeded the maximum time allowed to network latency.
+             </exception>
+             <exception cref="T:System.AggregateException">
+             The <paramref name="faultSensitiveMethod"/> was a victim of a transient fault. The <see cref="P:System.AggregateException.InnerExceptions"/> collection contains a <see cref="T:Cuemon.Resilience.TransientFaultException"/> object.
+            
+             -or
+            
+             An exception was thrown during the invocation of the <paramref name="faultSensitiveMethod"/>. The <see cref="P:System.AggregateException.InnerExceptions"/> collection contains information about the exception or exceptions.
+             </exception>
+        </member>
+        <member name="M:Cuemon.Resilience.TransientOperation.WithFunc``1(System.Func{``0},System.Action{Cuemon.Resilience.TransientOperationOptions})">
+             <summary>
+             Repetitively executes the specified <paramref name="faultSensitiveMethod"/> until the operation is successful, the amount of retry attempts has been reached, or a failed operation is not considered related to transient fault condition.
+             </summary>
+             <typeparam name="TResult">The type of the return value of <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <param name="faultSensitiveMethod">The fault sensitive function delegate that is invoked until an operation is successful, the amount of retry attempts has been reached, or a failed operation is not considered related to transient fault condition.</param>
+             <param name="setup">The <see cref="T:Cuemon.Resilience.TransientOperationOptions"/> which may be configured.</param>
+             <returns>The result from the <paramref name="faultSensitiveMethod"/>.</returns>
+             <exception cref="T:System.ArgumentNullException">
+             <paramref name="faultSensitiveMethod"/> cannot be null.
+             </exception>
+             <exception cref="T:Cuemon.Resilience.LatencyException">
+             The <paramref name="faultSensitiveMethod"/> exceeded the maximum time allowed to network latency.
+             </exception>
+             <exception cref="T:System.AggregateException">
+             The <paramref name="faultSensitiveMethod"/> was a victim of a transient fault. The <see cref="P:System.AggregateException.InnerExceptions"/> collection contains a <see cref="T:Cuemon.Resilience.TransientFaultException"/> object.
+            
+             -or
+            
+             An exception was thrown during the invocation of the <paramref name="faultSensitiveMethod"/>. The <see cref="P:System.AggregateException.InnerExceptions"/> collection contains information about the exception or exceptions.
+             </exception>
+        </member>
+        <member name="M:Cuemon.Resilience.TransientOperation.WithFunc``2(System.Func{``0,``1},``0,System.Action{Cuemon.Resilience.TransientOperationOptions})">
+             <summary>
+             Repetitively executes the specified <paramref name="faultSensitiveMethod"/> until the operation is successful, the amount of retry attempts has been reached, or a failed operation is not considered related to transient fault condition.
+             </summary>
+             <typeparam name="T">The type of the parameter of the function delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <typeparam name="TResult">The type of the return value of the function delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <param name="faultSensitiveMethod">The fault sensitive function delegate that is invoked until an operation is successful, the amount of retry attempts has been reached, or a failed operation is not considered related to transient fault condition.</param>
+             <param name="arg">The parameter of the function delegate <paramref name="faultSensitiveMethod"/>.</param>
+             <param name="setup">The <see cref="T:Cuemon.Resilience.TransientOperationOptions"/> which may be configured.</param>
+             <returns>The result from the <paramref name="faultSensitiveMethod"/>.</returns>
+             <exception cref="T:System.ArgumentNullException">
+             <paramref name="faultSensitiveMethod"/> cannot be null.
+             </exception>
+             <exception cref="T:Cuemon.Resilience.LatencyException">
+             The <paramref name="faultSensitiveMethod"/> exceeded the maximum time allowed to network latency.
+             </exception>
+             <exception cref="T:System.AggregateException">
+             The <paramref name="faultSensitiveMethod"/> was a victim of a transient fault. The <see cref="P:System.AggregateException.InnerExceptions"/> collection contains a <see cref="T:Cuemon.Resilience.TransientFaultException"/> object.
+            
+             -or
+            
+             An exception was thrown during the invocation of the <paramref name="faultSensitiveMethod"/>. The <see cref="P:System.AggregateException.InnerExceptions"/> collection contains information about the exception or exceptions.
+             </exception>
+        </member>
+        <member name="M:Cuemon.Resilience.TransientOperation.WithFunc``3(System.Func{``0,``1,``2},``0,``1,System.Action{Cuemon.Resilience.TransientOperationOptions})">
+             <summary>
+             Repetitively executes the specified <paramref name="faultSensitiveMethod"/> until the operation is successful, the amount of retry attempts has been reached, or a failed operation is not considered related to transient fault condition.
+             </summary>
+             <typeparam name="T1">The type of the first parameter of the function delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <typeparam name="T2">The type of the second parameter of the function delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <typeparam name="TResult">The type of the return value of the function delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <param name="faultSensitiveMethod">The fault sensitive function delegate that is invoked until an operation is successful, the amount of retry attempts has been reached, or a failed operation is not considered related to transient fault condition.</param>
+             <param name="arg1">The first parameter of the function delegate <paramref name="faultSensitiveMethod"/>.</param>
+             <param name="arg2">The second parameter of the function delegate <paramref name="faultSensitiveMethod"/>.</param>
+             <param name="setup">The <see cref="T:Cuemon.Resilience.TransientOperationOptions"/> which may be configured.</param>
+             <returns>The result from the <paramref name="faultSensitiveMethod"/>.</returns>
+             <exception cref="T:System.ArgumentNullException">
+             <paramref name="faultSensitiveMethod"/> cannot be null.
+             </exception>
+             <exception cref="T:Cuemon.Resilience.LatencyException">
+             The <paramref name="faultSensitiveMethod"/> exceeded the maximum time allowed to network latency.
+             </exception>
+             <exception cref="T:System.AggregateException">
+             The <paramref name="faultSensitiveMethod"/> was a victim of a transient fault. The <see cref="P:System.AggregateException.InnerExceptions"/> collection contains a <see cref="T:Cuemon.Resilience.TransientFaultException"/> object.
+            
+             -or
+            
+             An exception was thrown during the invocation of the <paramref name="faultSensitiveMethod"/>. The <see cref="P:System.AggregateException.InnerExceptions"/> collection contains information about the exception or exceptions.
+             </exception>
+        </member>
+        <member name="M:Cuemon.Resilience.TransientOperation.WithFunc``4(System.Func{``0,``1,``2,``3},``0,``1,``2,System.Action{Cuemon.Resilience.TransientOperationOptions})">
+             <summary>
+             Repetitively executes the specified <paramref name="faultSensitiveMethod"/> until the operation is successful, the amount of retry attempts has been reached, or a failed operation is not considered related to transient fault condition.
+             </summary>
+             <typeparam name="T1">The type of the first parameter of the function delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <typeparam name="T2">The type of the second parameter of the function delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <typeparam name="T3">The type of the third parameter of the function delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <typeparam name="TResult">The type of the return value of the function delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <param name="faultSensitiveMethod">The fault sensitive function delegate that is invoked until an operation is successful, the amount of retry attempts has been reached, or a failed operation is not considered related to transient fault condition.</param>
+             <param name="arg1">The first parameter of the function delegate <paramref name="faultSensitiveMethod"/>.</param>
+             <param name="arg2">The second parameter of the function delegate <paramref name="faultSensitiveMethod"/>.</param>
+             <param name="arg3">The third parameter of the function delegate <paramref name="faultSensitiveMethod"/>.</param>
+             <param name="setup">The <see cref="T:Cuemon.Resilience.TransientOperationOptions"/> which may be configured.</param>
+             <returns>The result from the <paramref name="faultSensitiveMethod"/>.</returns>
+             <exception cref="T:System.ArgumentNullException">
+             <paramref name="faultSensitiveMethod"/> cannot be null.
+             </exception>
+             <exception cref="T:Cuemon.Resilience.LatencyException">
+             The <paramref name="faultSensitiveMethod"/> exceeded the maximum time allowed to network latency.
+             </exception>
+             <exception cref="T:System.AggregateException">
+             The <paramref name="faultSensitiveMethod"/> was a victim of a transient fault. The <see cref="P:System.AggregateException.InnerExceptions"/> collection contains a <see cref="T:Cuemon.Resilience.TransientFaultException"/> object.
+            
+             -or
+            
+             An exception was thrown during the invocation of the <paramref name="faultSensitiveMethod"/>. The <see cref="P:System.AggregateException.InnerExceptions"/> collection contains information about the exception or exceptions.
+             </exception>
+        </member>
+        <member name="M:Cuemon.Resilience.TransientOperation.WithFunc``5(System.Func{``0,``1,``2,``3,``4},``0,``1,``2,``3,System.Action{Cuemon.Resilience.TransientOperationOptions})">
+             <summary>
+             Repetitively executes the specified <paramref name="faultSensitiveMethod"/> until the operation is successful, the amount of retry attempts has been reached, or a failed operation is not considered related to transient fault condition.
+             </summary>
+             <typeparam name="T1">The type of the first parameter of the function delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <typeparam name="T2">The type of the second parameter of the function delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <typeparam name="T3">The type of the third parameter of the function delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <typeparam name="T4">The type of the fourth parameter of the function delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <typeparam name="TResult">The type of the return value of the function delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <param name="faultSensitiveMethod">The fault sensitive function delegate that is invoked until an operation is successful, the amount of retry attempts has been reached, or a failed operation is not considered related to transient fault condition.</param>
+             <param name="arg1">The first parameter of the function delegate <paramref name="faultSensitiveMethod"/>.</param>
+             <param name="arg2">The second parameter of the function delegate <paramref name="faultSensitiveMethod"/>.</param>
+             <param name="arg3">The third parameter of the function delegate <paramref name="faultSensitiveMethod"/>.</param>
+             <param name="arg4">The fourth parameter of the function delegate <paramref name="faultSensitiveMethod"/>.</param>
+             <param name="setup">The <see cref="T:Cuemon.Resilience.TransientOperationOptions"/> which may be configured.</param>
+             <returns>The result from the <paramref name="faultSensitiveMethod"/>.</returns>
+             <exception cref="T:System.ArgumentNullException">
+             <paramref name="faultSensitiveMethod"/> cannot be null.
+             </exception>
+             <exception cref="T:Cuemon.Resilience.LatencyException">
+             The <paramref name="faultSensitiveMethod"/> exceeded the maximum time allowed to network latency.
+             </exception>
+             <exception cref="T:System.AggregateException">
+             The <paramref name="faultSensitiveMethod"/> was a victim of a transient fault. The <see cref="P:System.AggregateException.InnerExceptions"/> collection contains a <see cref="T:Cuemon.Resilience.TransientFaultException"/> object.
+            
+             -or
+            
+             An exception was thrown during the invocation of the <paramref name="faultSensitiveMethod"/>. The <see cref="P:System.AggregateException.InnerExceptions"/> collection contains information about the exception or exceptions.
+             </exception>
+        </member>
+        <member name="M:Cuemon.Resilience.TransientOperation.WithFunc``6(System.Func{``0,``1,``2,``3,``4,``5},``0,``1,``2,``3,``4,System.Action{Cuemon.Resilience.TransientOperationOptions})">
+             <summary>
+             Repetitively executes the specified <paramref name="faultSensitiveMethod"/> until the operation is successful, the amount of retry attempts has been reached, or a failed operation is not considered related to transient fault condition.
+             </summary>
+             <typeparam name="T1">The type of the first parameter of the function delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <typeparam name="T2">The type of the second parameter of the function delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <typeparam name="T3">The type of the third parameter of the function delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <typeparam name="T4">The type of the fourth parameter of the function delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <typeparam name="T5">The type of the fifth parameter of the function delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <typeparam name="TResult">The type of the return value of the function delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <param name="faultSensitiveMethod">The fault sensitive function delegate that is invoked until an operation is successful, the amount of retry attempts has been reached, or a failed operation is not considered related to transient fault condition.</param>
+             <param name="arg1">The first parameter of the function delegate <paramref name="faultSensitiveMethod"/>.</param>
+             <param name="arg2">The second parameter of the function delegate <paramref name="faultSensitiveMethod"/>.</param>
+             <param name="arg3">The third parameter of the function delegate <paramref name="faultSensitiveMethod"/>.</param>
+             <param name="arg4">The fourth parameter of the function delegate <paramref name="faultSensitiveMethod"/>.</param>
+             <param name="arg5">The fifth parameter of the function delegate <paramref name="faultSensitiveMethod"/>.</param>
+             <param name="setup">The <see cref="T:Cuemon.Resilience.TransientOperationOptions"/> which may be configured.</param>
+             <returns>The result from the <paramref name="faultSensitiveMethod"/>.</returns>
+             <exception cref="T:System.ArgumentNullException">
+             <paramref name="faultSensitiveMethod"/> cannot be null.
+             </exception>
+             <exception cref="T:Cuemon.Resilience.LatencyException">
+             The <paramref name="faultSensitiveMethod"/> exceeded the maximum time allowed to network latency.
+             </exception>
+             <exception cref="T:System.AggregateException">
+             The <paramref name="faultSensitiveMethod"/> was a victim of a transient fault. The <see cref="P:System.AggregateException.InnerExceptions"/> collection contains a <see cref="T:Cuemon.Resilience.TransientFaultException"/> object.
+            
+             -or
+            
+             An exception was thrown during the invocation of the <paramref name="faultSensitiveMethod"/>. The <see cref="P:System.AggregateException.InnerExceptions"/> collection contains information about the exception or exceptions.
+             </exception>
+        </member>
+        <member name="M:Cuemon.Resilience.TransientOperation.WithAction(System.Action,System.Action{Cuemon.Resilience.TransientOperationOptions})">
+             <summary>
+             Repetitively executes the specified <paramref name="faultSensitiveMethod"/> until the operation is successful, the amount of retry attempts has been reached, or a failed operation is not considered related to transient fault condition.
+             </summary>
+             <param name="faultSensitiveMethod">The fault sensitive delegate that is invoked until an operation is successful, the amount of retry attempts has been reached, or a failed operation is not considered related to transient fault condition.</param>
+             <param name="setup">The <see cref="T:Cuemon.Resilience.TransientOperationOptions"/> which may be configured.</param>
+             <exception cref="T:System.ArgumentNullException">
+             <paramref name="faultSensitiveMethod"/> cannot be null.
+             </exception>
+             <exception cref="T:Cuemon.Resilience.LatencyException">
+             The <paramref name="faultSensitiveMethod"/> exceeded the maximum time allowed to network latency.
+             </exception>
+             <exception cref="T:System.AggregateException">
+             The <paramref name="faultSensitiveMethod"/> was a victim of a transient fault. The <see cref="P:System.AggregateException.InnerExceptions"/> collection contains a <see cref="T:Cuemon.Resilience.TransientFaultException"/> object.
+            
+             -or
+            
+             An exception was thrown during the invocation of the <paramref name="faultSensitiveMethod"/>. The <see cref="P:System.AggregateException.InnerExceptions"/> collection contains information about the exception or exceptions.
+             </exception>
+        </member>
+        <member name="M:Cuemon.Resilience.TransientOperation.WithAction``1(System.Action{``0},``0,System.Action{Cuemon.Resilience.TransientOperationOptions})">
+             <summary>
+             Repetitively executes the specified <paramref name="faultSensitiveMethod"/> until the operation is successful, the amount of retry attempts has been reached, or a failed operation is not considered related to transient fault condition.
+             </summary>
+             <typeparam name="T">The type of the parameter of the delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <param name="faultSensitiveMethod">The fault sensitive delegate that is invoked until an operation is successful, the amount of retry attempts has been reached, or a failed operation is not considered related to transient fault condition.</param>
+             <param name="arg">The parameter of the delegate <paramref name="faultSensitiveMethod"/>.</param>
+             <param name="setup">The <see cref="T:Cuemon.Resilience.TransientOperationOptions"/> which may be configured.</param>
+             <exception cref="T:System.ArgumentNullException">
+             <paramref name="faultSensitiveMethod"/> cannot be null.
+             </exception>
+             <exception cref="T:Cuemon.Resilience.LatencyException">
+             The <paramref name="faultSensitiveMethod"/> exceeded the maximum time allowed to network latency.
+             </exception>
+             <exception cref="T:System.AggregateException">
+             The <paramref name="faultSensitiveMethod"/> was a victim of a transient fault. The <see cref="P:System.AggregateException.InnerExceptions"/> collection contains a <see cref="T:Cuemon.Resilience.TransientFaultException"/> object.
+            
+             -or
+            
+             An exception was thrown during the invocation of the <paramref name="faultSensitiveMethod"/>. The <see cref="P:System.AggregateException.InnerExceptions"/> collection contains information about the exception or exceptions.
+             </exception>
+        </member>
+        <member name="M:Cuemon.Resilience.TransientOperation.WithAction``2(System.Action{``0,``1},``0,``1,System.Action{Cuemon.Resilience.TransientOperationOptions})">
+             <summary>
+             Repetitively executes the specified <paramref name="faultSensitiveMethod"/> until the operation is successful, the amount of retry attempts has been reached, or a failed operation is not considered related to transient fault condition.
+             </summary>
+             <typeparam name="T1">The type of the first parameter of the delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <typeparam name="T2">The type of the second parameter of the delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <param name="faultSensitiveMethod">The fault sensitive delegate that is invoked until an operation is successful, the amount of retry attempts has been reached, or a failed operation is not considered related to transient fault condition.</param>
+             <param name="arg1">The first parameter of the delegate <paramref name="faultSensitiveMethod"/>.</param>
+             <param name="arg2">The second parameter of the delegate <paramref name="faultSensitiveMethod"/>.</param>
+             <param name="setup">The <see cref="T:Cuemon.Resilience.TransientOperationOptions"/> which may be configured.</param>
+             <exception cref="T:System.ArgumentNullException">
+             <paramref name="faultSensitiveMethod"/> cannot be null.
+             </exception>
+             <exception cref="T:Cuemon.Resilience.LatencyException">
+             The <paramref name="faultSensitiveMethod"/> exceeded the maximum time allowed to network latency.
+             </exception>
+             <exception cref="T:System.AggregateException">
+             The <paramref name="faultSensitiveMethod"/> was a victim of a transient fault. The <see cref="P:System.AggregateException.InnerExceptions"/> collection contains a <see cref="T:Cuemon.Resilience.TransientFaultException"/> object.
+            
+             -or
+            
+             An exception was thrown during the invocation of the <paramref name="faultSensitiveMethod"/>. The <see cref="P:System.AggregateException.InnerExceptions"/> collection contains information about the exception or exceptions.
+             </exception>
+        </member>
+        <member name="M:Cuemon.Resilience.TransientOperation.WithAction``3(System.Action{``0,``1,``2},``0,``1,``2,System.Action{Cuemon.Resilience.TransientOperationOptions})">
+             <summary>
+             Repetitively executes the specified <paramref name="faultSensitiveMethod"/> until the operation is successful, the amount of retry attempts has been reached, or a failed operation is not considered related to transient fault condition.
+             </summary>
+             <typeparam name="T1">The type of the first parameter of the delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <typeparam name="T2">The type of the second parameter of the delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <typeparam name="T3">The type of the third parameter of the delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <param name="faultSensitiveMethod">The fault sensitive delegate that is invoked until an operation is successful, the amount of retry attempts has been reached, or a failed operation is not considered related to transient fault condition.</param>
+             <param name="arg1">The first parameter of the delegate <paramref name="faultSensitiveMethod"/>.</param>
+             <param name="arg2">The second parameter of the delegate <paramref name="faultSensitiveMethod"/>.</param>
+             <param name="arg3">The third parameter of the delegate <paramref name="faultSensitiveMethod"/>.</param>
+             <param name="setup">The <see cref="T:Cuemon.Resilience.TransientOperationOptions"/> which may be configured.</param>
+             <exception cref="T:System.ArgumentNullException">
+             <paramref name="faultSensitiveMethod"/> cannot be null.
+             </exception>
+             <exception cref="T:Cuemon.Resilience.LatencyException">
+             The <paramref name="faultSensitiveMethod"/> exceeded the maximum time allowed to network latency.
+             </exception>
+             <exception cref="T:System.AggregateException">
+             The <paramref name="faultSensitiveMethod"/> was a victim of a transient fault. The <see cref="P:System.AggregateException.InnerExceptions"/> collection contains a <see cref="T:Cuemon.Resilience.TransientFaultException"/> object.
+            
+             -or
+            
+             An exception was thrown during the invocation of the <paramref name="faultSensitiveMethod"/>. The <see cref="P:System.AggregateException.InnerExceptions"/> collection contains information about the exception or exceptions.
+             </exception>
+        </member>
+        <member name="M:Cuemon.Resilience.TransientOperation.WithAction``4(System.Action{``0,``1,``2,``3},``0,``1,``2,``3,System.Action{Cuemon.Resilience.TransientOperationOptions})">
+             <summary>
+             Repetitively executes the specified <paramref name="faultSensitiveMethod"/> until the operation is successful, the amount of retry attempts has been reached, or a failed operation is not considered related to transient fault condition.
+             </summary>
+             <typeparam name="T1">The type of the first parameter of the delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <typeparam name="T2">The type of the second parameter of the delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <typeparam name="T3">The type of the third parameter of the delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <typeparam name="T4">The type of the fourth parameter of the delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <param name="faultSensitiveMethod">The fault sensitive delegate that is invoked until an operation is successful, the amount of retry attempts has been reached, or a failed operation is not considered related to transient fault condition.</param>
+             <param name="arg1">The first parameter of the delegate <paramref name="faultSensitiveMethod"/>.</param>
+             <param name="arg2">The second parameter of the delegate <paramref name="faultSensitiveMethod"/>.</param>
+             <param name="arg3">The third parameter of the delegate <paramref name="faultSensitiveMethod"/>.</param>
+             <param name="arg4">The fourth parameter of the delegate <paramref name="faultSensitiveMethod"/>.</param>
+             <param name="setup">The <see cref="T:Cuemon.Resilience.TransientOperationOptions"/> which may be configured.</param>
+             <exception cref="T:System.ArgumentNullException">
+             <paramref name="faultSensitiveMethod"/> cannot be null.
+             </exception>
+             <exception cref="T:Cuemon.Resilience.LatencyException">
+             The <paramref name="faultSensitiveMethod"/> exceeded the maximum time allowed to network latency.
+             </exception>
+             <exception cref="T:System.AggregateException">
+             The <paramref name="faultSensitiveMethod"/> was a victim of a transient fault. The <see cref="P:System.AggregateException.InnerExceptions"/> collection contains a <see cref="T:Cuemon.Resilience.TransientFaultException"/> object.
+            
+             -or
+            
+             An exception was thrown during the invocation of the <paramref name="faultSensitiveMethod"/>. The <see cref="P:System.AggregateException.InnerExceptions"/> collection contains information about the exception or exceptions.
+             </exception>
+        </member>
+        <member name="M:Cuemon.Resilience.TransientOperation.WithAction``5(System.Action{``0,``1,``2,``3,``4},``0,``1,``2,``3,``4,System.Action{Cuemon.Resilience.TransientOperationOptions})">
+             <summary>
+             Repetitively executes the specified <paramref name="faultSensitiveMethod"/> until the operation is successful, the amount of retry attempts has been reached, or a failed operation is not considered related to transient fault condition.
+             </summary>
+             <typeparam name="T1">The type of the first parameter of the delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <typeparam name="T2">The type of the second parameter of the delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <typeparam name="T3">The type of the third parameter of the delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <typeparam name="T4">The type of the fourth parameter of the delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <typeparam name="T5">The type of the fifth parameter of the delegate <paramref name="faultSensitiveMethod"/>.</typeparam>
+             <param name="faultSensitiveMethod">The fault sensitive delegate that is invoked until an operation is successful, the amount of retry attempts has been reached, or a failed operation is not considered related to transient fault condition.</param>
+             <param name="arg1">The first parameter of the delegate <paramref name="faultSensitiveMethod"/>.</param>
+             <param name="arg2">The second parameter of the delegate <paramref name="faultSensitiveMethod"/>.</param>
+             <param name="arg3">The third parameter of the delegate <paramref name="faultSensitiveMethod"/>.</param>
+             <param name="arg4">The fourth parameter of the delegate <paramref name="faultSensitiveMethod"/>.</param>
+             <param name="arg5">The fifth parameter of the delegate <paramref name="faultSensitiveMethod"/>.</param>
+             <param name="setup">The <see cref="T:Cuemon.Resilience.TransientOperationOptions"/> which may be configured.</param>
+             <exception cref="T:System.ArgumentNullException">
+             <paramref name="faultSensitiveMethod"/> cannot be null.
+             </exception>
+             <exception cref="T:Cuemon.Resilience.LatencyException">
+             The <paramref name="faultSensitiveMethod"/> exceeded the maximum time allowed to network latency.
+             </exception>
+             <exception cref="T:System.AggregateException">
+             The <paramref name="faultSensitiveMethod"/> was a victim of a transient fault. The <see cref="P:System.AggregateException.InnerExceptions"/> collection contains a <see cref="T:Cuemon.Resilience.TransientFaultException"/> object.
+            
+             -or
+            
+             An exception was thrown during the invocation of the <paramref name="faultSensitiveMethod"/>. The <see cref="P:System.AggregateException.InnerExceptions"/> collection contains information about the exception or exceptions.
+             </exception>
+        </member>
+        <member name="P:Cuemon.Resilience.TransientOperation.FaultCallback">
+            <summary>
+            Gets or sets the callback delegate that is invoked when a transient fault occurs.
+            </summary>
+            <value>A callback delegate that is invoked when a transient fault occurs.</value>
+        </member>
+        <member name="T:Cuemon.Resilience.TransientOperationOptions">
+            <summary>
+            Configuration options for <see cref="T:Cuemon.Resilience.TransientOperation"/>.
+            </summary>
+        </member>
+        <member name="M:Cuemon.Resilience.TransientOperationOptions.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Cuemon.Resilience.TransientOperationOptions"/> class.
+            </summary>
+            <remarks>
+            The following table shows the initial property values for an instance of <see cref="T:Cuemon.Resilience.TransientOperationOptions"/>.
+            <list type="table">
+                <listheader>
+                    <term>Property</term>
+                    <description>Initial Value</description>
+                </listheader>
+                <item>
+                    <term><see cref="P:Cuemon.Resilience.TransientOperationOptions.RetryAttempts"/></term>
+                    <description><see cref="P:Cuemon.Resilience.TransientOperationOptions.DefaultRetryAttempts"/></description>
+                </item>
+                <item>
+                    <term><see cref="P:Cuemon.Resilience.TransientOperationOptions.EnableRecovery"/></term>
+                    <description><see cref="P:Cuemon.Resilience.TransientOperationOptions.RetryAttempts"/> > 0</description>
+                </item>
+                <item>
+                    <term><see cref="P:Cuemon.Resilience.TransientOperationOptions.RetryStrategy"/></term>
+                    <description><c>retry</c> + 2^ to a maximum of 5; eg. 1, 2, 4, 8, 16 to a total of 31 seconds</description>
+                </item>
+                <item>
+                    <term><see cref="P:Cuemon.Resilience.TransientOperationOptions.DetectionStrategy"/></term>
+                    <description><c>exception => false</c></description>
+                </item>
+                <item>
+                    <term><see cref="P:Cuemon.Resilience.TransientOperationOptions.MaximumAllowedLatency"/></term>
+                    <description><c>5 minutes</c></description>
+            
+                </item>
+            </list>
+            </remarks>
+        </member>
+        <member name="P:Cuemon.Resilience.TransientOperationOptions.RetryAttempts">
+            <summary>
+            Gets or sets the amount of retry attempts for transient faults. Default value is <see cref="P:Cuemon.Resilience.TransientOperationOptions.DefaultRetryAttempts"/>.
+            </summary>
+            <value>The retry attempts for transient faults.</value>
+        </member>
+        <member name="P:Cuemon.Resilience.TransientOperationOptions.EnableRecovery">
+            <summary>
+            Gets or sets a value indicating whether a transient operation should be attempted gracefully recovered in case of a transient fault or simply be invoked like a normal operation.
+            </summary>
+            <value><c>true</c> if a transient operation should be attempted gracefully recovered in case of a transient fault; otherwise, <c>false</c>.</value>
+            <remarks>For testing or diagnostic purposes, it can sometimes come in handy to turn off transient fault recovery.</remarks>
+        </member>
+        <member name="P:Cuemon.Resilience.TransientOperationOptions.RetryStrategy">
+            <summary>
+            Gets or sets the function delegate that determines the amount of time to wait for a transient fault to recover gracefully before trying a new attempt.
+            </summary>
+            <returns>A <see cref="T:System.Func`1"/> that determines the amount of time to wait for a transient fault to recover gracefully.</returns>
+            <remarks>Default implementation is <see cref="T:System.Int32"/> + 2^ to a maximum of 5; eg. 1, 2, 4, 8, 16 to a total of 32 seconds.</remarks>
+        </member>
+        <member name="P:Cuemon.Resilience.TransientOperationOptions.DetectionStrategy">
+            <summary>
+            Gets or sets the function delegate that determines if an <see cref="T:System.Exception"/> contains clues that would suggest a transient fault.
+            </summary>
+            <value>A <see cref="T:System.Func`1"/> that determines if an <see cref="T:System.Exception"/> contains clues that would suggest a transient fault.</value>
+            <remarks>Default implementation is fixed to none-transient failure.</remarks>
+        </member>
+        <member name="P:Cuemon.Resilience.TransientOperationOptions.MaximumAllowedLatency">
+            <summary>
+            Gets or sets the maximum allowed latency before a <see cref="T:Cuemon.Resilience.LatencyException"/> is raised.
+            </summary>
+            <value>A <see cref="T:System.TimeSpan"/> defining the maximum allowed latency.</value>
+        </member>
+        <member name="P:Cuemon.Resilience.TransientOperationOptions.DefaultRetryAttempts">
+            <summary>
+            Gets or sets the default amount of retry attempts for transient faults. Default is 5 attempts.
+            </summary>
+            <value>The default amount of retry attempts for transient faults.</value>
+        </member>
+    </members>
+</doc>

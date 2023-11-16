@@ -1,0 +1,71 @@
+﻿<Window x:Class="Booking.AdminBookingList"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Booking"
+        mc:Ignorable="d"
+        Title="Список бронирования" Height="740" Width="800" MinHeight="540" MinWidth="800" MaxHeight="1000" MaxWidth="800" Icon="/icon.png"
+        WindowStartupLocation="CenterScreen">
+    <Window.Background>
+        <ImageBrush ImageSource="/fon8.jpg"/>
+    </Window.Background>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        
+        <Label x:Name="txtnameadmin" Content="Test Test " HorizontalAlignment="Left" Margin="0,15,0,0" VerticalAlignment="Top" Background="#FF0495D8" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#FF281A5D" FontWeight="Bold" FontSize="14"/>
+
+        <StackPanel Margin="30,40,0,65" HorizontalAlignment="Left" VerticalAlignment="Top" >
+        <StackPanel Width="168" HorizontalAlignment="Center"  VerticalAlignment="Top" Height="400" Margin="0,0,0,30">
+            <StackPanel.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF70B8DE"/>
+                    <GradientStop Color="#CC70B8DE" Offset="1"/>
+                </LinearGradientBrush>
+            </StackPanel.Background>
+
+            <GroupBox Header="Информация" FontWeight="Bold" Foreground="White" Height="400" HorizontalAlignment="Center" Width="158" Margin="5,0,5,20" VerticalAlignment="Top">
+                <StackPanel Orientation="Vertical">
+                    <Label Content="Преподаватель" Foreground="#FF003970" FontWeight="Bold" />
+                    <TextBox x:Name="txtteacher" TextWrapping="Wrap" Text="" IsReadOnly="True"/>
+                    <Label Content="Дата" Foreground="#FF003970" FontWeight="Bold" />
+                    <TextBox x:Name="txtdate" TextWrapping="Wrap" Text="" IsReadOnly="True"/>
+                    <Label Content="Время" Foreground="#FF003970" FontWeight="Bold"/>
+                    <TextBox x:Name="txttime" TextWrapping="Wrap" Text="" IsReadOnly="True"/>
+                    <Label Content="Номер аудитории" Foreground="#FF003970" FontWeight="Bold" />
+                    <TextBox x:Name="txtnumber" TextWrapping="Wrap" Text="" IsReadOnly="True"/>
+                    <Label Content="Этаж" Foreground="#FF003970" FontWeight="Bold" />
+                    <TextBox x:Name="txtfloor" TextWrapping="Wrap" Text="" IsReadOnly="True"/>
+                    <Label Content="Предмет" Foreground="#FF003970" FontWeight="Bold" />
+                    <TextBox x:Name="txtlesson" TextWrapping="Wrap" Text="" IsReadOnly="True"/>
+                    <Label Content="Тип занятия" Foreground="#FF003970" FontWeight="Bold"></Label>
+                    <TextBox x:Name="txtlessontype" IsReadOnly="True"></TextBox>
+                </StackPanel>
+            </GroupBox>
+
+        </StackPanel>
+        
+        <StackPanel Orientation="Vertical" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+            <Button x:Name="btndelete" Content="Удалить" Margin="0,0,0,10" Background="#E572B7E0" FontWeight="Bold" FontSize="14" Foreground="#FF013870" Click="btndelete_Click" Width="168" HorizontalAlignment="Stretch" Height="40"/>
+            <Button x:Name="btnreturn" Content="Назад" Click="Button_Back" Background="#FF469ECE" Foreground="#FF003970" FontSize="14" Height="40" Margin="0,0,0,0" FontWeight="Bold" Width="168" HorizontalAlignment="Stretch" />
+
+        </StackPanel>
+        
+        </StackPanel>
+        
+        <ListView x:Name="adminlistbooking"  d:ItemsSource="{d:SampleData ItemCount=6}" Width="540" Height="600" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,40,30,0" Background="#CC469ECD" SelectionChanged="listbooking_SelectionChanged">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn x:Name="idbooking" DisplayMemberBinding="{Binding Path=Id}" Width="0"/>
+                    <GridViewColumn x:Name="idteacher" DisplayMemberBinding="{Binding Path=Teacher}" Header="Преподаватель" Width="auto"/>
+                    <GridViewColumn x:Name="date" DisplayMemberBinding="{Binding Path=Date_booking}" Header="Дата" Width="79"/>
+                    <GridViewColumn x:Name="idaudience" DisplayMemberBinding="{Binding Path=Audience}" Header="Аудитория" Width="79"/>
+                    <GridViewColumn x:Name="time_start" DisplayMemberBinding="{Binding Path=Time_start}" Header="Начало" Width="79"/>
+                    <GridViewColumn x:Name="time_end" DisplayMemberBinding="{Binding Path=Time_end}" Header="Конец" Width="79"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</Window>

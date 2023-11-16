@@ -1,0 +1,52 @@
+﻿<Window x:Class="Booking.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Booking"
+        mc:Ignorable="d"
+        Title="Бронирование аудиторий в колледже" Height="440" Width="800"  MinHeight="440" MinWidth="800" MaxHeight="440" MaxWidth="800"   Icon="/icon.png" 
+        
+    WindowStartupLocation="CenterScreen">
+    <Window.Background>
+        <ImageBrush ImageSource="/blue.jpg"/>
+    </Window.Background>
+    <Grid Height="auto" Width="auto"  VerticalAlignment="Center" HorizontalAlignment="Center" >
+        <StackPanel Height="auto" Width="auto" Background="#7F8ADDFE" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+            
+            <StackPanel Width="auto" Margin="10,0,10,-1">
+                <Label Content="Авторизация" FontWeight="Bold" FontSize="30" HorizontalAlignment="Center" Foreground="#FFEEFBFF" VerticalAlignment="Stretch" Margin="0,5,0,0" />
+            </StackPanel>
+            
+            <StackPanel Height="30"  Orientation="Horizontal" HorizontalAlignment="Center" Margin="10,15,10,0">
+                <Label Content="Логин" Width="62" Margin="5,0,0,0" FontSize="14" Foreground="#FF064CDF" FontWeight="Bold" />
+                <TextBox x:Name="txt_login" TextWrapping="NoWrap" Text="" Width="198" Height="30" Margin="0,0,5,0" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" AutomationProperties.HelpText="Логин" VerticalAlignment="Center"  MaxLength="25"/>
+            </StackPanel>
+            
+            <StackPanel Height="30" Width="270" Orientation="Horizontal" Margin="10,10,10,0" HorizontalAlignment="Center">
+                <Label Content="Пароль" Width="62" Margin="5,0,0,0" FontSize="14" Foreground="#FF064CDF" FontWeight="Bold" HorizontalAlignment="Left"/>
+                <PasswordBox x:Name="txt_password"  Width="198" Height="30" Margin="0,0,5,0" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" HorizontalAlignment="Right" MaxLength="25"/>
+            </StackPanel>
+            
+            <StackPanel Height="21" Width="270" Orientation="Horizontal" Margin="10,10,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                <RadioButton x:Name="rb_teacher" GroupName="acount"  Content="Преподаватель" IsChecked="True" Margin="0,0,0,0" FontSize="14" Foreground="#FF064CDF" FontWeight="Bold" HorizontalAlignment="Center"/>
+                <RadioButton x:Name="rb_admin" GroupName="acount" Content="Администратор" IsChecked="false" Margin="5,0,0,0" FontSize="14" Foreground="#FF064CDF" FontWeight="Bold"/>
+            </StackPanel>
+            
+            <StackPanel x:Name="panel_error" Height="30" Width="270" Margin="10,5,10,5">
+                <Label x:Name="lb_message" Content="" Margin="5,0,5,0" Foreground="#FFE80B0B" FontWeight="Bold" HorizontalAlignment="Center"/>
+            </StackPanel>
+            
+            <StackPanel Height="30" Width="270" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10,0,10,7">
+                <CheckBox x:Name="chk_remember" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,30,0" Foreground="#FF064CDF" FontWeight="Bold" Width="90">запомнить</CheckBox>
+                <Button x:Name="btn_in" Content="Войти" Width="150" Height="30" Background="#FF4C8BF2" Margin="0,0,10,0" FontSize="14" Click="btn_in_Click" Foreground="#FF013870" FontWeight="Bold" BorderBrush="#FF80B4F0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                </StackPanel>
+            
+            <StackPanel Height="30" Width="270" Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,0,10,10">
+                <Button x:Name="btn_out" Content="Выход" Width="270" Height="30" Background="#FF4C8BF2"  Click="btn_out_Click" FontSize="14" Foreground="#FF013870" FontWeight="Bold" HorizontalContentAlignment="Center" BorderBrush="#FF80B4F0" />
+            </StackPanel>
+        </StackPanel>
+
+
+    </Grid>
+</Window>

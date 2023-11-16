@@ -1,0 +1,57 @@
+﻿<Window x:Class="Booking.AudienceList"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Booking"
+        mc:Ignorable="d"
+        Title="Список аудиторий" Height="450" Width="855" MinHeight="450" MinWidth="855" Icon="/icon.png"
+        WindowStartupLocation="CenterScreen">
+    <Window.Background>
+        <ImageBrush ImageSource="/fon8.jpg"/>
+    </Window.Background>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Label x:Name="txtnameadmin" Content="Test Test " HorizontalAlignment="Left" Margin="0,15,0,0" VerticalAlignment="Top" Background="#FF0495D8" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#FF281A5D" FontWeight="Bold" FontSize="14"/>
+
+        <StackPanel Height="50" Orientation="Horizontal" Width="540" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="30,0,0,10">
+            <Button x:Name="btnreturn" Content="Назад" Click="Button_Back" Background="#FF469ECE" Foreground="#FF003970" FontSize="14" Width="125" Height="40" Margin="0,5,5,5" FontWeight="Bold" />
+            <Button x:Name="btnaddaudience" Content="Добавить" Margin="10,5,5,5" Width="126.5" Background="#E572B7E0" FontWeight="Bold" FontSize="14" Click="btnaddaudience_Click" Foreground="#FF013870"/>
+            <Button x:Name="btnchange" Content="Изменить" Margin="5,5,5,5" Width="126.5" Background="#E572B7E0" FontWeight="Bold" FontSize="14" Click="btnchange_Click" Foreground="#FF013870"/>
+            <Button x:Name="btndelete" Content="Удалить" Margin="5,5,0,5" Width="126.5" Background="#E572B7E0" FontWeight="Bold" FontSize="14" Foreground="#FF013870" Click="btndelete_Click"/>
+        </StackPanel>
+        <StackPanel Width="230" Height="335" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,30,60">
+            <StackPanel.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF70B8DE"/>
+                    <GradientStop Color="#CC70B8DE" Offset="1"/>
+                </LinearGradientBrush>
+            </StackPanel.Background>
+            
+            <ScrollViewer Name="scroll" CanContentScroll="True" Height="335">
+                <GroupBox Header="Информация" FontWeight="Bold" Foreground="White">
+                    <StackPanel Orientation="Vertical">
+                        <Label Content="Номер аудитории" Foreground="#FF003970" FontWeight="Bold" />
+                        <TextBox x:Name="txtnumber" TextWrapping="Wrap" Text="" IsReadOnly="True"/>
+                        <Label Content="Этаж" Foreground="#FF003970" FontWeight="Bold" />
+                        <TextBox x:Name="txtfloor" TextWrapping="Wrap" Text="" IsReadOnly="True"/>
+                        <Label Content="Описание" Foreground="#FF003970" FontWeight="Bold" />
+                        <TextBlock x:Name="txtinventory" Margin="15,0,5,0" FontWeight="Normal" MaxWidth="181.2" Width="181.2" MinWidth="181.2" TextWrapping="Wrap"></TextBlock>                      
+                    </StackPanel>
+                </GroupBox>
+            </ScrollViewer>
+        </StackPanel>
+        <ListView x:Name="listaudience"  d:ItemsSource="{d:SampleData ItemCount=5}" Width="540" Height="335" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="30,0,0,60" Background="#CC469ECD" SelectionChanged="listaudience_SelectionChanged">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn x:Name="idaudience" DisplayMemberBinding="{Binding Path=Id}" Width="0"/>
+                    <GridViewColumn x:Name="naudience" DisplayMemberBinding="{Binding Path=Number}" Header="№ аудитории" Width="auto"/>
+                    <GridViewColumn x:Name="faudience" DisplayMemberBinding="{Binding Path=Peculiarities}" Header="Описание" Width="auto"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+    </Grid>
+</Window>
